@@ -1,0 +1,51 @@
+package ds.tree;
+
+public class convertBinaryTreeToDLL {
+Node root;
+Node head;
+static Node prev=null;
+	public static void main(String[] args) {
+		convertBinaryTreeToDLL tree= new convertBinaryTreeToDLL();
+
+		
+        
+        tree.root = new Node(10); 
+        tree.root.left = new Node(12); 
+        tree.root.right = new Node(15); 
+        tree.root.left.left = new Node(25); 
+        tree.root.left.right = new Node(30); 
+        tree.root.right.left = new Node(36); 
+   
+        // convert to DLL 
+        tree.BinaryTree2DoubleLinkedList(tree.root); 
+           
+        // Print the converted List 
+        tree.printList(tree.head); 
+	}
+	private void printList(Node head) {
+		Node curr=head;
+		while(curr!=null) {
+			System.out.print(curr.data+" ");
+			curr=curr.right;
+		}
+		
+		
+	}
+	private void BinaryTree2DoubleLinkedList(Node root2) {
+		if(root2==null) {
+			return;
+		}
+		BinaryTree2DoubleLinkedList(root2.left);
+		if(prev==null) {
+			head=root2;
+		}
+		else {
+			prev.right=root2;
+			root2.left=prev;
+		}
+		prev=root2;
+		
+		BinaryTree2DoubleLinkedList(root2.right);
+	}
+
+}
